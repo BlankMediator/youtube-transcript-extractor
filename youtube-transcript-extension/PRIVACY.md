@@ -8,7 +8,8 @@ The extension does not use analytics, remote servers, tracking pixels, advertisi
 
 Permissions are limited to:
 
+- `activeTab`: allows the extension to run on the current YouTube video tab only after the user clicks the toolbar button.
+- `scripting`: injects the extension's packaged script and CSS into the current YouTube video tab after the user clicks the toolbar button.
 - `storage`: remembers the user's preferred floating button position in the browser.
-- YouTube watch page content script access: reads transcript rows rendered on YouTube video pages.
 
 Last updated: 2026-06-11
