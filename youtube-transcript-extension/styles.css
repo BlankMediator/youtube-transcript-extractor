@@ -1,13 +1,3 @@
-#yt-transcript-extractor-root {
-  position: fixed;
-  right: 18px;
-  bottom: 18px;
-  z-index: 2147483647;
-  font-family: Arial, sans-serif;
-  touch-action: none;
-}
-
-#yt-transcript-extractor-root button,
 #yt-transcript-extractor-panel button {
   border: 1px solid #c9c9c9;
   background: #ffffff;
@@ -16,19 +6,6 @@
   padding: 8px 10px;
   font: 500 13px/1 Arial, sans-serif;
   cursor: pointer;
-}
-
-#yt-transcript-extractor-root button {
-  background: #cc0000;
-  border-color: #cc0000;
-  color: #ffffff;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.28);
-  user-select: none;
-}
-
-#yt-transcript-extractor-root.ytx-dragging button {
-  cursor: grabbing;
-  opacity: 0.92;
 }
 
 #yt-transcript-extractor-panel {

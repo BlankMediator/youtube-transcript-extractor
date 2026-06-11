@@ -10,7 +10,6 @@
 - Explain permissions:
   - `activeTab`: activate the transcript panel on the current YouTube video tab after a user click.
   - `scripting`: inject local extension UI files into the current YouTube video tab after a user click.
-  - `storage`: remember the user's preferred floating button position.
 - Add reviewer test instructions from `STORE_LISTING.md`.
 - Submit for review.
 

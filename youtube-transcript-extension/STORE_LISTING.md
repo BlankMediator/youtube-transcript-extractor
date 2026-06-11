@@ -16,7 +16,6 @@ Features:
 
 - View transcript text directly on the YouTube page.
 - Toggle timestamps on or off.
-- Move the floating transcript button and keep its position.
 - Copy the transcript to the clipboard.
 - Download TXT for reading or notes.
 - Download JSON for structured workflows.

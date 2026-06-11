@@ -1,7 +1,5 @@
 (() => {
-  const ROOT_ID = "yt-transcript-extractor-root";
   const PANEL_ID = "yt-transcript-extractor-panel";
-  const LAUNCHER_POSITION_KEY = "ytTranscriptLauncherPosition";
 
   const state = {
     rows: [],
@@ -64,103 +62,6 @@
 
   function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
-  }
-
-  function clamp(value, min, max) {
-    return Math.min(Math.max(value, min), max);
-  }
-
-  function getStoredLauncherPosition(callback) {
-    chrome.storage?.local?.get?.(LAUNCHER_POSITION_KEY, (result) => {
-      callback(result?.[LAUNCHER_POSITION_KEY] || null);
-    });
-  }
-
-  function saveLauncherPosition(position) {
-    chrome.storage?.local?.set?.({ [LAUNCHER_POSITION_KEY]: position });
-  }
-
-  function applyLauncherPosition(root, position) {
-    if (!position) return;
-
-    const width = root.offsetWidth || 104;
-    const height = root.offsetHeight || 38;
-    const left = clamp(position.left, 8, window.innerWidth - width - 8);
-    const top = clamp(position.top, 8, window.innerHeight - height - 8);
-
-    root.style.left = `${left}px`;
-    root.style.top = `${top}px`;
-    root.style.right = "auto";
-    root.style.bottom = "auto";
-  }
-
-  function enableLauncherDrag(root) {
-    const button = root.querySelector("button");
-    let drag = null;
-
-    root.addEventListener("pointerdown", (event) => {
-      if (event.button !== 0) return;
-
-      const rect = root.getBoundingClientRect();
-      drag = {
-        pointerId: event.pointerId,
-        startX: event.clientX,
-        startY: event.clientY,
-        offsetX: event.clientX - rect.left,
-        offsetY: event.clientY - rect.top,
-        moved: false,
-      };
-      root.setPointerCapture(event.pointerId);
-    });
-
-    root.addEventListener("pointermove", (event) => {
-      if (!drag || event.pointerId !== drag.pointerId) return;
-
-      const deltaX = Math.abs(event.clientX - drag.startX);
-      const deltaY = Math.abs(event.clientY - drag.startY);
-      if (deltaX > 3 || deltaY > 3) drag.moved = true;
-      if (!drag.moved) return;
-
-      const width = root.offsetWidth;
-      const height = root.offsetHeight;
-      const left = clamp(event.clientX - drag.offsetX, 8, window.innerWidth - width - 8);
-      const top = clamp(event.clientY - drag.offsetY, 8, window.innerHeight - height - 8);
-
-      root.classList.add("ytx-dragging");
-      root.style.left = `${left}px`;
-      root.style.top = `${top}px`;
-      root.style.right = "auto";
-      root.style.bottom = "auto";
-      event.preventDefault();
-    });
-
-    root.addEventListener("pointerup", (event) => {
-      if (!drag || event.pointerId !== drag.pointerId) return;
-
-      root.releasePointerCapture(event.pointerId);
-      root.classList.remove("ytx-dragging");
-
-      if (drag.moved) {
-        const rect = root.getBoundingClientRect();
-        saveLauncherPosition({ left: Math.round(rect.left), top: Math.round(rect.top) });
-        button.dataset.skipNextClick = "true";
-      }
-
-      drag = null;
-    });
-
-    button.addEventListener("click", (event) => {
-      if (button.dataset.skipNextClick === "true") {
-        delete button.dataset.skipNextClick;
-        event.preventDefault();
-        event.stopPropagation();
-      }
-    }, true);
-
-    window.addEventListener("resize", () => {
-      const rect = root.getBoundingClientRect();
-      applyLauncherPosition(root, { left: rect.left, top: rect.top });
-    });
   }
 
   async function tryOpenTranscript() {
@@ -251,20 +152,6 @@
     setOutput(extractRows());
   }
 
-  function injectLauncher() {
-    document.getElementById(ROOT_ID)?.remove();
-
-    const root = document.createElement("div");
-    root.id = ROOT_ID;
-    root.innerHTML = '<button type="button" title="Drag to move. Click to extract YouTube transcript.">Transcript</button>';
-    root.querySelector("button").addEventListener("click", ensurePanel);
-    document.body.appendChild(root);
-    getStoredLauncherPosition((position) => applyLauncherPosition(root, position));
-    enableLauncherDrag(root);
-  }
-
-  injectLauncher();
-
   chrome.runtime?.onMessage?.addListener((message) => {
     if (message?.type === "ytx-open-panel") {
       ensurePanel();
@@ -275,9 +162,7 @@
   setInterval(() => {
     if (location.href !== lastUrl) {
       lastUrl = location.href;
-      document.getElementById(ROOT_ID)?.remove();
       document.getElementById(PANEL_ID)?.remove();
-      injectLauncher();
     }
   }, 1000);
 })();
