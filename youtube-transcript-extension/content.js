@@ -252,7 +252,7 @@
   }
 
   function injectLauncher() {
-    if (document.getElementById(ROOT_ID)) return;
+    document.getElementById(ROOT_ID)?.remove();
 
     const root = document.createElement("div");
     root.id = ROOT_ID;
