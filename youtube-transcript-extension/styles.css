@@ -1,0 +1,106 @@
+#yt-transcript-extractor-root {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 2147483647;
+  font-family: Arial, sans-serif;
+  touch-action: none;
+}
+
+#yt-transcript-extractor-root button,
+#yt-transcript-extractor-panel button {
+  border: 1px solid #c9c9c9;
+  background: #ffffff;
+  color: #111111;
+  border-radius: 4px;
+  padding: 8px 10px;
+  font: 500 13px/1 Arial, sans-serif;
+  cursor: pointer;
+}
+
+#yt-transcript-extractor-root button {
+  background: #cc0000;
+  border-color: #cc0000;
+  color: #ffffff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.28);
+  user-select: none;
+}
+
+#yt-transcript-extractor-root.ytx-dragging button {
+  cursor: grabbing;
+  opacity: 0.92;
+}
+
+#yt-transcript-extractor-panel {
+  position: fixed;
+  right: 18px;
+  bottom: 62px;
+  width: min(620px, calc(100vw - 36px));
+  height: min(620px, calc(100vh - 96px));
+  z-index: 2147483647;
+  display: grid;
+  grid-template-rows: auto auto auto auto 1fr;
+  gap: 8px;
+  box-sizing: border-box;
+  padding: 12px;
+  border: 1px solid #cfcfcf;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #111111;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.28);
+  font-family: Arial, sans-serif;
+}
+
+#yt-transcript-extractor-panel .ytx-header {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 10px;
+}
+
+#yt-transcript-extractor-panel .ytx-header strong {
+  font-size: 15px;
+}
+
+#yt-transcript-extractor-count,
+#yt-transcript-extractor-status {
+  color: #555555;
+  font-size: 12px;
+}
+
+#yt-transcript-extractor-panel .ytx-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+#yt-transcript-extractor-panel .ytx-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  color: #333333;
+  font-size: 13px;
+  user-select: none;
+}
+
+#yt-transcript-extractor-panel .ytx-toggle input {
+  margin: 0;
+}
+
+#yt-transcript-extractor-status {
+  margin: 0;
+}
+
+#yt-transcript-extractor-output {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  resize: none;
+  border: 1px solid #d7d7d7;
+  border-radius: 6px;
+  padding: 10px;
+  color: #111111;
+  background: #fafafa;
+  font: 13px/1.45 Consolas, "Courier New", monospace;
+}
