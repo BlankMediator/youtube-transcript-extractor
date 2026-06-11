@@ -30,6 +30,5 @@
       "run_at": "document_idle"
     }
   ],
-  "permissions": ["activeTab", "scripting", "storage"],
-  "host_permissions": ["https://www.youtube.com/*"]
+  "permissions": ["storage"]
 }

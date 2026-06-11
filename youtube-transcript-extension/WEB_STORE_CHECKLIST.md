@@ -8,10 +8,8 @@
 - Fill out the privacy section using `PRIVACY.md`.
 - Declare the single purpose: extracting transcript rows rendered on YouTube pages.
 - Explain permissions:
-  - `activeTab`: activate the panel on the current YouTube tab after a user click.
-  - `scripting`: inject local extension UI files when needed.
   - `storage`: remember the user's preferred floating button position.
-  - YouTube page access: read transcript rows rendered on YouTube video pages.
+  - YouTube watch page content script access: read transcript rows rendered on YouTube video pages.
 - Add reviewer test instructions from `STORE_LISTING.md`.
 - Submit for review.
 
